@@ -1,7 +1,7 @@
 import gymnasium as gym
 
 #env = gym.make("CartPole-v1", render_mode="human")
-env = gym.make("CartPole-v1", render_mode="human") #wo graphics
+env = gym.make("CartPole-v1") #wo graphics
 
 for episode in range(3000):
     state, _ = env.reset()
