@@ -4,7 +4,8 @@ import jax.numpy as jnp
 import optax
 
 #1.  environment
-env = gym.make("CartPole-v1", render_mode="human")
+#env = gym.make("CartPole-v1", render_mode="human")
+env = gym.make("CartPole-v1") #wo graphics
 obs_dim = env.observation_space.shape[0]
 n_actions = env.action_space.n
 
