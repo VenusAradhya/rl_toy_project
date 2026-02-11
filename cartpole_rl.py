@@ -1,4 +1,3 @@
-pip install gymnasium[classic-control] jax jaxlib optax
 
 import gymnasium as gym
 import jax
