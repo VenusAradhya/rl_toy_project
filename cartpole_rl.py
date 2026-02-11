@@ -44,27 +44,35 @@ def update(params, opt_state, obs, action, reward):
     return new_params, opt_state
 
 #6. Training Loop
-for episode in range(100):
+optimizer = optax.adam(learning_rate=0.001)
+
+for episode in range(1000): # more time to learn
     obs, _ = env.reset()
-    total_reward = 0
-    done = False
+    #  lists to store episode's data
+    states, actions, rewards = [], [], []
     
+    done = False
     while not done:
-        # Select Action
         key, subkey = jax.random.split(key)
         probs = policy_network(params, jnp.array(obs))
         action = int(jax.random.choice(subkey, n_actions, p=probs))
         
-        # Step Environment
         next_obs, reward, terminated, truncated, _ = env.step(action)
-        done = terminated or truncated
         
-        # Update Weights (The Learning Part)
-        params, opt_state = update(params, opt_state, jnp.array(obs), action, reward)
+        # save don't update
+        states.append(obs)
+        actions.append(action)
+        rewards.append(reward)
         
         obs = next_obs
-        total_reward += reward
+        done = terminated or truncated
 
-    print(f"Episode {episode + 1}: Reward = {total_reward}")
+    # update after episode
+    total_r = sum(rewards)
+    for s, a, r in zip(states, actions, rewards):
+        params, opt_state = update(params, opt_state, jnp.array(s), a, total_r)
+
+    if episode % 10 == 0:
+        print(f"Episode {episode}: Total Reward = {total_r}")
 
 env.close()
