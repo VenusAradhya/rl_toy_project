@@ -47,7 +47,7 @@ def update(params, opt_state, obs, action, reward):
 #6. Training Loop
 optimizer = optax.adam(learning_rate=0.001)
 
-for episode in range(1000): # more time to learn
+for episode in range(3000): # more time to learn
     obs, _ = env.reset()
     #  lists to store episode's data
     states, actions, rewards = [], [], []
