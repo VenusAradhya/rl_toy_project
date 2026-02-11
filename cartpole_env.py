@@ -17,7 +17,7 @@ for episode in range(3000):
         done = terminated or truncated
 
     if episode %100 == 0:
-        print (f"Epsiode {epsiode}: Total = {total_reward}")
+        print (f"Episode {episode}: Total = {total_reward}")
 
 print("Total reward:", total_reward)
 env.close()
