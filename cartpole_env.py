@@ -9,7 +9,7 @@ for episode in range(3000):
     total_reward = 0
 
     while not done:
-        env.render()
+        #env.render()
         action = env.action_space.sample()  #random action
         state, reward, terminated, truncated, info = env.step(action)
 
